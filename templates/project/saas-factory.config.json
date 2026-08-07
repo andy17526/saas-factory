@@ -1,0 +1,35 @@
+{
+  "protocol_version": "2.7.0",
+  "paths": {
+    "plans": "docs/07-plans",
+    "plan_templates": "docs/07-plans/_templates",
+    "protocol": "docs/00-system/protocol",
+    "roles": "docs/00-system/protocol/roles",
+    "state": "docs/00-system/state/session_state.md",
+    "state_history": "docs/00-system/state/session_state_history.md",
+    "decisions": "docs/00-system/state/decisions_log.md",
+    "incidents": "docs/00-system/state/incident_state.md",
+    "evidence": "docs/06-evidence",
+    "features": "docs/02-features",
+    "feature_registry": "docs/00-system/knowledge-registry/features.yaml",
+    "skill_routing": "docs/00-system/knowledge-registry/skill-routing.json",
+    "skills": ".claude/skills",
+    "skill_dossiers": "docs/06-evidence/skills"
+  },
+  "contract_source": {
+    "mode": "EFFECTIVE_REPOSITORY",
+    "sources": ["src"]
+  },
+  "zones": {
+    "safe": ["docs/**", "AGENTS.md"],
+    "controlled": ["src/**", ".claude/skills/**"],
+    "high_risk": []
+  },
+  "knowledge": {
+    "obsidian": "required",
+    "graph": "optional"
+  },
+  "versioning": {
+    "apps": []
+  }
+}

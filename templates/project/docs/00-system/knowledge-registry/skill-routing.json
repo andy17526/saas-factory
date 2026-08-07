@@ -1,0 +1,12 @@
+{
+  "$comment": "Mapeo mecanico ruta -> feature -> skills. El kernel lo resuelve contra files_allowed del GSC; no se declara a mano en el plan.",
+  "features": [],
+  "domains": [
+    {
+      "domain": "infra-ci",
+      "skill": null,
+      "code_paths": [".github/workflows/**"],
+      "also_require": []
+    }
+  ]
+}

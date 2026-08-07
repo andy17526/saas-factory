@@ -1,0 +1,38 @@
+name: Protocol Validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate-protocol:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Verificar instalacion del protocolo
+        run: npx saas-factory doctor
+
+      - name: Validate knowledge (Obsidian vault)
+        run: node node_modules/saas-factory/src/validate/validate-obsidian-links.cjs
+
+      - name: Check skill routing
+        env:
+          PROTOCOL_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: node node_modules/saas-factory/src/kernel/skill-check.cjs --base "$PROTOCOL_BASE_REF"
+
+      - name: Lint skills
+        run: node node_modules/saas-factory/src/kernel/skill-lint-cli.cjs

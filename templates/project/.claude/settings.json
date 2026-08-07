@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const r=process.env.CLAUDE_PROJECT_DIR;if(!r)process.exit(2);require(require('node:path').join(r,'node_modules/saas-factory/src/kernel/plan-gate.cjs'))\"",
+            "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": "node -e \"const r=process.env.CLAUDE_PROJECT_DIR;if(!r)process.exit(2);require(require('node:path').join(r,'node_modules/saas-factory/src/kernel/skill-hint.cjs'))\"",
+            "timeout": 5000
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const r=process.env.CLAUDE_PROJECT_DIR;if(!r)process.exit(2);require(require('node:path').join(r,'node_modules/saas-factory/src/kernel/commit-gate.cjs'))\"",
+            "timeout": 5000
+          }
+        ]
+      }
+    ]
+  }
+}

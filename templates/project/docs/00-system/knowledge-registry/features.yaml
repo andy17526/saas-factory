@@ -1,0 +1,3 @@
+# Registro canonico de features. Cada entrada debe tener nodo en docs/02-features/
+# y entrada correspondiente en skill-routing.json (lo verifica skill-check).
+features: []

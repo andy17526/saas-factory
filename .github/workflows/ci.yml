@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Tests del kernel
+        run: node --test test/*.test.cjs
+
+      # Gate de genericidad: si el protocolo solo funciona en el repositorio donde
+      # nacio, esto se pone rojo. Es la unica prueba real de que es portable.
+      - name: Smoke test de instalacion sobre directorio vacio
+        run: |
+          TARGET=$(mktemp -d)
+          git -C "$TARGET" init -q
+          node bin/saas-factory.cjs init --dir "$TARGET"
+          SAAS_FACTORY_ROOT="$TARGET" node bin/saas-factory.cjs doctor
+
+      - name: Sin residuos del repositorio de origen
+        run: |
+          if grep -rniE 'flowly|verifactu' src/kernel/*.cjs src/install templates/ bin/; then
+            echo "Quedan referencias al repositorio de origen"
+            exit 1
+          fi
+          echo "Sin residuos"

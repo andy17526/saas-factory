@@ -1,0 +1,15 @@
+{
+  "name": "saas-factory",
+  "version": "0.1.0",
+  "description": "Kernel de gobierno de mutaciones para proyectos asistidos por IA: contrato de alcance (GSC), gates fail-closed, planes, auditor post-mutacion y estado retomable.",
+  "bin": { "saas-factory": "bin/saas-factory.cjs" },
+  "main": "src/kernel/protocol-contract.cjs",
+  "files": ["bin", "src", "templates"],
+  "scripts": {
+    "test": "node --test test/*.test.cjs",
+    "validate": "node bin/saas-factory.cjs validate"
+  },
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "keywords": ["ai-agents", "governance", "claude-code", "scope-contract", "guardrails"]
+}
